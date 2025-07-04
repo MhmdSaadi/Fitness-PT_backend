@@ -6,7 +6,7 @@ from email.mime.multipart import MIMEMultipart
 from datetime import datetime, timedelta
 from itsdangerous import URLSafeTimedSerializer
 
-import jwt
+from jose import jwt
 from passlib.context import CryptContext
 
 from src.core.config import settings
@@ -63,7 +63,7 @@ def decode_token(token: str) -> dict:
     except jwt.ExpiredSignatureError:
         logger.warning("Token expired")
         return None
-    except jwt.InvalidTokenError as e:
+    except jwt.JWTError as e:
         logger.error(f"Invalid token: {str(e)}")
         return None
     except Exception as e:
@@ -111,7 +111,7 @@ async def send_email(to_addresses, subject, html_content):
         logger.info(f"Attempting to send email to: {to_addresses}")
         
         msg = MIMEMultipart()
-        msg['From'] = f"{settings.APP_NAME} <{settings.SMTP_USERNAME}>"
+        msg['From'] = f"{settings.APP_NAME} <{settings.SMTP_USERNAME}>"  # TODO: Replace with your app name
         msg['To'] = ", ".join(to_addresses)
         msg['Subject'] = subject
         msg.attach(MIMEText(html_content, 'html'))

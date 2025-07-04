@@ -39,7 +39,7 @@ class UserCreateModel(SQLModel):
     model_config = {
         "json_schema_extra": {
             "example": {
-                "username": "footfit_user",
+                "username": "{{project_name}}_user",  # TODO: Replace with your example username
                 "email": "user@example.com",
                 "first_name": "John",
                 "last_name": "Doe",
@@ -49,9 +49,9 @@ class UserCreateModel(SQLModel):
                 "height_cm": 175.0,
                 "weight_kg": 70.0,
                 "activity_level": "moderately_active",
-                "primary_concerns": "Flat feet and occasional heel pain",
-                "fitness_goals": "Improve foot strength and reduce pain",
-                "bio": "Looking to improve my foot health"
+                "primary_concerns": "Example concern",
+                "fitness_goals": "Example goal",
+                "bio": "Looking to improve my health"
             }
         }
     }

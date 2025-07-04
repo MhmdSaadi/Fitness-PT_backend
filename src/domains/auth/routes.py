@@ -70,13 +70,13 @@ async def create_user_account(
     logger.info(f"User created successfully: {user_data.email}")
     
     token = create_url_safe_token({"email": user_data.email})
-    verification_link = f"http://{settings.DOMAIN}/api/v1/auth/verify/{token}"
+    verification_link = f"http://{settings.DOMAIN}/api/v1/auth/verify/{{token}}"  # TODO: Replace with your verification link logic
     
     html_content = f"""
     <h1>Welcome to {settings.APP_NAME}!</h1>
-    <p>Please click <a href="{verification_link}">here</a> to verify your email address.</p>
+    <p>Please click <a href=\"{verification_link}\">here</a> to verify your email address.</p>
     <p>This link will expire in 24 hours.</p>
-    """
+    """  # TODO: Customize email content
     logger.info(f"Adding email verification task for: {user_data.email}")
     bg_tasks.add_task(send_email, [user_data.email], f"Welcome to {settings.APP_NAME} - Verify Your Email", html_content)
 
