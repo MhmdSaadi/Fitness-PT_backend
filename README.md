@@ -1,6 +1,5 @@
-# {{project_name}} Backend Template
+# Fitness-PT-backend
 
-> **TEMPLATE:** This is the backend service for your project. Replace all `{{...}}` placeholders and TODOs with your own details.
 
 ## 🏗️ Tech Stack
 - FastAPI
